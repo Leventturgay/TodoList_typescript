@@ -5,6 +5,7 @@ import TodoList from '../components/TodoList';
 
 const url="https://6351820cdfe45bbd55c21ad8.mockapi.io/api/todos"
 
+
 const Home = () => {
  const [todos, setTodos]=useState<TodoType[]>([])
 
@@ -16,6 +17,19 @@ try {
   console.log(error);
 }
  }
+const addTodo:AddFn=async (text)=> {
+const newTodo={
+  task:text,
+  isDone:false
+}
+try {
+  await axios.post(url, newTodo)
+  getTodos()
+} catch (error) {
+  console.log(error)
+}
+}
+
   useEffect(()=>{
     getTodos()
   }, [])
